@@ -34,9 +34,9 @@ if [ "$DEBUG" = "true" ]; then
   export CFLAGS+=" -DDEBUG_F"
 fi
 export CXXFLAGS="$CFLAGS"
-export LDFLAGS="-L$TARGET/lib -O3 -s EXPORTED_FUNCTIONS=['_main','_malloc','_free'] -s ALLOW_TABLE_GROWTH"
+export LDFLAGS="-L$TARGET/lib -O3 -sEXPORTED_FUNCTIONS=_main,_malloc,_free -sALLOW_TABLE_GROWTH"
 if [ "$WASM_BIGINT" = "true" ]; then
-  export LDFLAGS+=" -s WASM_BIGINT"
+  export LDFLAGS+=" -sWASM_BIGINT"
 fi
 
 # Build paths
