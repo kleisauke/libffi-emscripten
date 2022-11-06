@@ -47,15 +47,16 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - emsdk-env
       - run:
-          name: build
+          name: install automake
           command: |
-            ./build.sh
+            sudo apt-get update
+            sudo apt-get install automake
+      - emsdk-env
+      - run: ./build.sh
       - run:
           name: build tests
           command: |
-            source ./emsdk/emsdk_env.sh
             cp -r testsuite/libffi.call testsuite/libffi.call.test
             cp -r testsuite/libffi.closures testsuite/libffi.closures.test
             ./testsuite/emscripten-test-stuff/build-tests.sh testsuite/libffi.call.test
@@ -72,15 +73,16 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - emsdk-env
       - run:
-          name: build
+          name: install automake
           command: |
-            ./build.sh --enable-wasm-bigint
+            sudo apt-get update
+            sudo apt-get install automake
+      - emsdk-env
+      - run: ./build.sh --enable-wasm-bigint
       - run:
           name: build tests
           command: |
-            source ./emsdk/emsdk_env.sh
             cp -r testsuite/libffi.call testsuite/libffi.call.test
             cp -r testsuite/libffi.closures testsuite/libffi.closures.test
             export EXTRA_LD_FLAGS="-s WASM_BIGINT"
